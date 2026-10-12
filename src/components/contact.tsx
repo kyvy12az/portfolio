@@ -1,4 +1,3 @@
-import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { useState, useRef, type FormEvent, type ChangeEvent } from "react";
 import { toast } from "sonner";
@@ -81,44 +80,46 @@ export const Contact = () => {
   };
 
   // handle form submit
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    // prevent default page reload
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // validate form
-    if (!validateForm()) return false;
+    if (!validateForm()) return;
 
-    // show loader
     setLoading(true);
 
-    // send email
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_SERVICE_ID,
-        import.meta.env.VITE_APP_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Shubham",
-          from_email: form.email.trim().toLowerCase(),
-          to_email: import.meta.env.VITE_APP_EMAILJS_RECIEVER,
-          message: form.message,
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        import.meta.env.VITE_APP_EMAILJS_KEY,
-      )
-      .then(() => toast.success("Cảm ơn bạn đã liên hệ với tôi."))
-      .catch((error) => {
-        // Error handle
-        console.log("[CONTACT_ERROR]: ", error);
-        toast.error("Đã xảy ra lỗi.");
-      })
-      .finally(() => {
-        setLoading(false);
-        setForm({
-          name: "",
-          email: "",
-          message: "",
-        });
+        body: JSON.stringify(form),
       });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Không thể gửi thông điệp");
+      }
+
+      toast.success(result.message);
+
+      setForm({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("[CONTACT_ERROR]", error);
+
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Đã xảy ra lỗi khi gửi thông điệp.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

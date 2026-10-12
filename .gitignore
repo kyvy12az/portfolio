@@ -17,6 +17,7 @@ dist-ssr
 
 # Environment Variables
 .env
+data/banner.json
 
 # Editor directories and files
 .vscode/*

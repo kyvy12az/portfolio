@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import {
   About,
@@ -13,17 +12,20 @@ import {
 } from "./components";
 import Banner from "./components/banner";
 import Footer from "./components/footer";
+import AdminBanner from "./components/admin-banner";
 
 // App
 const App = () => {
-  const [hide, setHide] = useState(true);
+  if (window.location.pathname === "/admin") {
+    return <AdminBanner />;
+  }
 
   return (
     <BrowserRouter>
-      <Banner hide={hide} setHide={setHide} />
+      <Banner />
       <div className="relative z-0 bg-primary">
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar hide={hide} />
+          <Navbar />
           <Hero />
         </div>
         <About />

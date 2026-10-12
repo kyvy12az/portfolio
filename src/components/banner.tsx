@@ -1,77 +1,47 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { close, bulb } from "../assets";
-
-type BannerProps = {
-  hide: boolean;
-  setHide: (hide: boolean) => void;
+type BannerResponse = {
+  message: string;
+  updatedAt?: string;
 };
 
-const BANNER_KEY = "hide-banner";
+const DEFAULT_MESSAGE =
+  "Chào mừng bạn đến với website của Kỳ Vỹ!";
 
-const Banner = ({ hide, setHide }: BannerProps) => {
+const Banner = () => {
+  const [message, setMessage] = useState(DEFAULT_MESSAGE);
+
   useEffect(() => {
-    const hideBanner = localStorage.getItem(BANNER_KEY);
+    const loadBanner = async () => {
+      try {
+        const response = await fetch("/api/banner");
 
-    if (hideBanner) return;
+        if (!response.ok) {
+          throw new Error("Không thể tải banner");
+        }
 
-    const bannerTimer = setTimeout(() => {
-      setHide(false);
-    }, 5000);
+        const data: BannerResponse = await response.json();
 
-    return () => clearTimeout(bannerTimer);
+        if (data.message) {
+          setMessage(data.message);
+        }
+      } catch (error) {
+        console.error("[BANNER_ERROR]", error);
+      }
+    };
+
+    loadBanner();
+
+    const timer = window.setInterval(loadBanner, 5000);
+
+    return () => window.clearInterval(timer);
   }, []);
 
-  const handleBannerClose = () => {
-    setHide(true);
-    localStorage.setItem(BANNER_KEY, "1");
-  };
-
   return (
-    <div
-      id="sticky-banner"
-      tabIndex={-1}
-      className={`${
-        hide ? "hidden" : "block"
-      } absolute h-20 top-0 left-0 z-50 flex justify-between w-full p-4 bg-primary shadow-md opacity-[0.98]`}
-    >
-      <div className="flex items-center mx-auto">
-        <p className="flex items-center text-sm font-normal text-gray-500 ">
-          <span className="inline-flex p-1 mr-3 bg-gray-200 rounded-full ">
-            <img
-              src={bulb}
-              alt="bulb"
-              height={12}
-              width={12}
-              className="text-gray-500"
-            />
-            <span className="sr-only">Light bulb</span>
-          </span>
-          <span>
-            Did you enjoy this portfolio? Take a look at my{" "}
-            <Link
-              to="https://www.sanidhyy.name"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline font-medium text-blue-600 underline underline-offset-2 decoration-600 hover:no-underline"
-            >
-              new portfolio
-            </Link>
-            .
-          </span>
-        </p>
-      </div>
-      <div className="flex items-center">
-        <button
-          data-dismiss-target="#sticky-banner"
-          onClick={handleBannerClose}
-          type="button"
-          className="flex-shrink-0 inline-flex justify-center items-center text-gray-400 hover:bg-gray-800 rounded-lg text-sm p-1.5 "
-        >
-          <img src={close} alt="close" height={12} width={12} />
-          <span className="sr-only">Close banner</span>
-        </button>
+    <div className="top-banner" role="status">
+      <div className="top-banner-track">
+        <span>📢 {message}</span>
+        <span aria-hidden="true">📢 {message}</span>
       </div>
     </div>
   );
