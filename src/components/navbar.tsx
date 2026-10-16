@@ -31,8 +31,8 @@ export const Navbar = () => {
     <nav
       className={cn(
         styles.paddingX,
-        "w-full flex items-center py-4 fixed top-10 z-20 backdrop-blur-md bg-primary/80 border-b border-teal-500/10 transition-all duration-300",
-        isAtBottom ? "shadow-lg shadow-teal-500/5" : ""
+        "w-full flex items-center py-4 fixed top-10 z-20 backdrop-blur-md bg-primary/80 border-b border-outline transition-all duration-300",
+        isAtBottom ? "shadow-lg shadow-black/10" : ""
       )}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
@@ -46,10 +46,10 @@ export const Navbar = () => {
           }}
         >
           <div className="relative">
-            <div className="absolute inset-0 bg-teal-500/20 rounded-full blur-md group-hover:blur-lg transition-all" />
+            <div className="absolute inset-0 bg-accent/5 rounded-full blur-md group-hover:blur-lg transition-all" />
             <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain relative z-10 group-hover:scale-110 transition-transform duration-200" />
           </div>
-          <p className="text-white text-[18px] font-bold cursor-pointer flex font-display group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 transition-all duration-200">
+          <p className="text-white text-[18px] font-bold cursor-pointer flex font-display group-hover:text-accent transition-all duration-200">
             Kỳ Vỹ&nbsp;<span className="sm:block hidden">| Developer</span>
           </p>
         </Link>
@@ -68,9 +68,9 @@ export const Navbar = () => {
                   href={`#${link.id}`}
                   className={cn(
                     active === link.title
-                      ? "text-teal-400"
+                      ? "text-accent"
                       : "text-secondary",
-                    "hover:text-teal-400 text-[18px] font-medium cursor-pointer font-display transition-colors duration-200 block pb-1",
+                    "hover:text-accent text-[18px] font-medium cursor-pointer font-display transition-colors duration-200 block pb-1",
                   )}
                 >
                   {link.title}
@@ -78,7 +78,7 @@ export const Navbar = () => {
 
                 <span
                   className={cn(
-                    "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-teal-400 to-cyan-400 transition-all duration-300 rounded-full",
+                    "absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 rounded-full",
                     active === link.title
                       ? "w-full"
                       : "w-0 group-hover:w-full",
@@ -100,7 +100,7 @@ export const Navbar = () => {
           <div
             className={cn(
               !toggle ? "hidden" : "flex",
-              "p-6 backdrop-blur-md bg-tertiary/95 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl border border-teal-500/20 shadow-xl shadow-teal-500/10"
+              "p-6 backdrop-blur-md bg-tertiary/95 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl border border-outline shadow-xl shadow-black/20"
             )}
           >
             <ul className="list-none flex justify-end items-start flex-col gap-4">
@@ -119,9 +119,9 @@ export const Navbar = () => {
                       href={`#${link.id}`}
                       className={cn(
                         active === link.title
-                          ? "text-teal-400"
+                          ? "text-accent"
                           : "text-secondary",
-                        "font-display font-medium cursor-pointer text-[16px] hover:text-teal-400 transition-colors duration-200 pb-1 inline-block",
+                        "font-display font-medium cursor-pointer text-[16px] hover:text-accent transition-colors duration-200 pb-1 inline-block",
                       )}
                     >
                       {link.title}
@@ -129,7 +129,7 @@ export const Navbar = () => {
 
                     <span
                       className={cn(
-                        "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-teal-400 to-cyan-400 transition-all duration-300 rounded-full",
+                        "absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 rounded-full",
                         active === link.title
                           ? "w-full"
                           : "w-0 group-hover:w-full",

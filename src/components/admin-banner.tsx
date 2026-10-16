@@ -50,7 +50,7 @@ const AdminBanner = () => {
   return (
     <main className="min-h-screen bg-primary px-4 py-12 text-white">
       <div className="mx-auto max-w-lg rounded-2xl bg-black-100 p-8 shadow-xl">
-        <p className="text-sm uppercase tracking-widest text-teal-400">
+        <p className="text-sm uppercase tracking-widest text-accent">
           ADMIN
         </p>
 
@@ -97,7 +97,7 @@ const AdminBanner = () => {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-teal-600 px-6 py-3 font-bold hover:bg-teal-500 disabled:opacity-50"
+            className="rounded-xl bg-accent text-primary px-6 py-3 font-bold hover:bg-accent-hover disabled:opacity-50"
           >
             {loading ? "Đang cập nhật..." : "Cập nhật banner"}
           </button>
@@ -105,7 +105,7 @@ const AdminBanner = () => {
 
         <a
           href="/"
-          className="mt-6 inline-block text-teal-400 hover:underline"
+          className="mt-6 inline-block text-accent hover:underline"
         >
           ← Quay về trang chủ
         </a>
