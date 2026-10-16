@@ -1,144 +1,100 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { menu, close } from "../assets";
+import { close, menu } from "../assets";
 import { NAV_LINKS } from "../constants";
 import { styles } from "../styles";
 import { cn } from "../utils/lib";
 
-// Navbar
 export const Navbar = () => {
-  // state variables
   const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [isAtBottom, setIsAtBottom] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsAtBottom(true);
-      } else {
-        setIsAtBottom(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const links = NAV_LINKS.filter((link) => link.id !== "source-code");
 
   return (
     <nav
       className={cn(
         styles.paddingX,
-        "w-full flex items-center py-4 fixed top-10 z-20 backdrop-blur-md bg-primary/80 border-b border-teal-500/10 transition-all duration-300",
-        isAtBottom ? "shadow-lg shadow-teal-500/5" : ""
+        "fixed left-0 right-0 top-10 z-50 border-b transition-all duration-300",
+        scrolled
+          ? "border-white/[0.08] bg-[#071014]/92 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+          : "border-white/[0.05] bg-[#071014]/72 py-4 backdrop-blur-md",
       )}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo */}
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-3 group"
+          className="group flex items-center gap-3"
           onClick={() => {
             setActive("");
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <div className="relative">
-            <div className="absolute inset-0 bg-teal-500/20 rounded-full blur-md group-hover:blur-lg transition-all" />
-            <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain relative z-10 group-hover:scale-110 transition-transform duration-200" />
-          </div>
-          <p className="text-white text-[18px] font-bold cursor-pointer flex font-display group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 transition-all duration-200">
-            Kỳ Vỹ&nbsp;<span className="sm:block hidden">| Developer</span>
-          </p>
+          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.025] font-display text-sm font-semibold text-[#5eead4] transition-colors group-hover:border-[#2dd4bf]/40">
+            KV
+          </span>
+          <span className="font-display text-base font-semibold tracking-[0.14em] text-white">
+            KỲ VỸ
+          </span>
         </Link>
 
-        {/* Nav Links (Desktop) */}
-        <ul className="list-none hidden sm:flex flex-row gap-10">
-          {NAV_LINKS
-            .filter((link) => link.id !== "source-code")
-            .map((link) => (
-              <li
-                key={link.id}
-                className="relative group"
+        <ul className="hidden items-center gap-9 sm:flex">
+          {links.map((link) => (
+            <li key={link.id}>
+              <a
+                href={`#${link.id}`}
                 onClick={() => setActive(link.title)}
+                className={cn(
+                  "relative block py-2 text-sm font-medium transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:bg-[#2dd4bf] after:transition-all",
+                  active === link.title
+                    ? "text-white after:w-full"
+                    : "text-white/55 after:w-0 hover:text-white after:hover:w-full",
+                )}
               >
-                <a
-                  href={`#${link.id}`}
-                  className={cn(
-                    active === link.title
-                      ? "text-teal-400"
-                      : "text-secondary",
-                    "hover:text-teal-400 text-[18px] font-medium cursor-pointer font-display transition-colors duration-200 block pb-1",
-                  )}
-                >
-                  {link.title}
-                </a>
-
-                <span
-                  className={cn(
-                    "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-teal-400 to-cyan-400 transition-all duration-300 rounded-full",
-                    active === link.title
-                      ? "w-full"
-                      : "w-0 group-hover:w-full",
-                  )}
-                />
-              </li>
-            ))}
+                {link.title}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        {/* Hamburger Menu (Mobile) */}
-        <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="Menu"
-            className="w-[28px] h-[28px] object-contain cursor-pointer"
-            onClick={() => setToggle(!toggle)}
-          />
+        <button
+          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.025] sm:hidden"
+          onClick={() => setOpen((current) => !current)}
+          aria-label={open ? "Đóng menu" : "Mở menu"}
+          aria-expanded={open}
+        >
+          <img src={open ? close : menu} alt="" className="h-5 w-5 object-contain" />
+        </button>
 
-          <div
-            className={cn(
-              !toggle ? "hidden" : "flex",
-              "p-6 backdrop-blur-md bg-tertiary/95 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl border border-teal-500/20 shadow-xl shadow-teal-500/10"
-            )}
-          >
-            <ul className="list-none flex justify-end items-start flex-col gap-4">
-              {NAV_LINKS
-                .filter((link) => link.id !== "source-code")
-                .map((link) => (
-                  <li
-                    key={link.id}
-                    className="relative group"
-                    onClick={() => {
-                      setToggle(false);
-                      setActive(link.title);
-                    }}
-                  >
-                    <a
-                      href={`#${link.id}`}
-                      className={cn(
-                        active === link.title
-                          ? "text-teal-400"
-                          : "text-secondary",
-                        "font-display font-medium cursor-pointer text-[16px] hover:text-teal-400 transition-colors duration-200 pb-1 inline-block",
-                      )}
-                    >
-                      {link.title}
-                    </a>
-
-                    <span
-                      className={cn(
-                        "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-teal-400 to-cyan-400 transition-all duration-300 rounded-full",
-                        active === link.title
-                          ? "w-full"
-                          : "w-0 group-hover:w-full",
-                      )}
-                    />
-                  </li>
-                ))}
-            </ul>
-          </div>
+        <div
+          className={cn(
+            "absolute left-4 right-4 top-[66px] rounded-xl border border-white/10 bg-[#0a1419]/98 p-3 shadow-2xl backdrop-blur-xl sm:hidden",
+            open ? "block" : "hidden",
+          )}
+        >
+          {links.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={() => {
+                setOpen(false);
+                setActive(link.title);
+              }}
+              className="block rounded-lg px-4 py-3 text-sm font-medium text-white/65 transition-colors hover:bg-white/[0.04] hover:text-white"
+            >
+              {link.title}
+            </a>
+          ))}
         </div>
       </div>
     </nav>

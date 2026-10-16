@@ -124,24 +124,28 @@ export const Contact = () => {
 
   return (
     <SectionWrapper idName="contact">
-      <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
+      <div className="grid items-stretch gap-8 overflow-hidden lg:grid-cols-[1.08fr_0.92fr]">
         <motion.div
           variants={slideIn("left", "tween", 0.2, 1)}
-          className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
+          className="rounded-2xl border border-white/[0.08] bg-[#0a1419] p-6 sm:p-9"
         >
           {/* Title */}
-          <p className={styles.sectionSubText}>Liên hệ</p>
-          <h3 className={styles.sectionHeadText}>Liên Hệ.</h3>
+          <p className={styles.sectionSubText}>06 · Liên hệ</p>
+          <h3 className={`${styles.sectionHeadText} mt-4`}>Cùng tạo nên điều thú vị.</h3>
+          <p className="mt-5 max-w-xl text-base leading-7 text-white/45">
+            Bạn có ý tưởng, dự án hoặc chỉ muốn gửi một lời chào? Tin nhắn sẽ
+            được chuyển trực tiếp đến điện thoại của tôi.
+          </p>
 
           {/* Form */}
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="mt-12 flex flex-col gap-8"
+            className="mt-9 flex flex-col gap-6"
           >
             {/* Name */}
             <label htmlFor="name" className="flex flex-col">
-              <span className="text-white font-medium mb-4">Tên Của Bạn*</span>
+              <span className="mb-2 text-sm font-medium text-white/75">Tên của bạn</span>
               <input
                 type="text"
                 name="name"
@@ -152,7 +156,7 @@ export const Contact = () => {
                 title="Tên của bạn là gì?"
                 disabled={loading}
                 aria-disabled={loading}
-                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium disabled:bg-tertiary/20 disabled:text-white/60"
+                className="rounded-lg border border-white/10 bg-white/[0.025] px-4 py-3.5 text-white outline-none transition placeholder:text-white/25 focus:border-[#2dd4bf]/55 disabled:opacity-50"
               />
 
               {/* Invalid Name */}
@@ -163,7 +167,7 @@ export const Contact = () => {
 
             {/* Email */}
             <label htmlFor="email" className="flex flex-col">
-              <span className="text-white font-medium mb-4">Email Của Bạn*</span>
+              <span className="mb-2 text-sm font-medium text-white/75">Email của bạn</span>
               <input
                 type="email"
                 name="email"
@@ -174,7 +178,7 @@ export const Contact = () => {
                 title="Email của bạn là gì?"
                 disabled={loading}
                 aria-disabled={loading}
-                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium disabled:bg-tertiary/20 disabled:text-white/60"
+                className="rounded-lg border border-white/10 bg-white/[0.025] px-4 py-3.5 text-white outline-none transition placeholder:text-white/25 focus:border-[#2dd4bf]/55 disabled:opacity-50"
               />
 
               {/* Invalid Email */}
@@ -185,7 +189,7 @@ export const Contact = () => {
 
             {/* Message */}
             <label htmlFor="message" className="flex flex-col">
-              <span className="text-white font-medium mb-4">Tin Nhắn Của Bạn*</span>
+              <span className="mb-2 text-sm font-medium text-white/75">Thông điệp</span>
               <textarea
                 rows={7}
                 name="message"
@@ -196,7 +200,7 @@ export const Contact = () => {
                 title="Bạn muốn nói gì?"
                 disabled={loading}
                 aria-disabled={loading}
-                className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium disabled:bg-tertiary/20 disabled:text-white/60 disabled:resize-none"
+                className="resize-none rounded-lg border border-white/10 bg-white/[0.025] px-4 py-3.5 text-white outline-none transition placeholder:text-white/25 focus:border-[#2dd4bf]/55 disabled:opacity-50"
               />
 
               {/* Invalid Message */}
@@ -209,7 +213,7 @@ export const Contact = () => {
             <button
               type="submit"
               title={loading ? "Đang gửi..." : "Gửi"}
-              className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl disabled:bg-tertiary/20 disabled:text-white/60"
+              className="w-fit rounded-lg bg-[#2dd4bf] px-7 py-3.5 text-sm font-semibold text-[#041113] outline-none transition hover:-translate-y-0.5 hover:bg-[#5eead4] disabled:cursor-not-allowed disabled:opacity-40"
               disabled={loading}
               aria-disabled={loading}
             >
@@ -222,7 +226,7 @@ export const Contact = () => {
         {/* Earth Model */}
         <motion.div
           variants={slideIn("right", "tween", 0.2, 1)}
-          className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+          className="min-h-[360px] overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.015] lg:min-h-full"
         >
           <EarthCanvas />
         </motion.div>

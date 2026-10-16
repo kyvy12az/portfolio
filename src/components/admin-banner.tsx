@@ -48,9 +48,9 @@ const AdminBanner = () => {
   };
 
   return (
-    <main className="min-h-screen bg-primary px-4 py-12 text-white">
-      <div className="mx-auto max-w-lg rounded-2xl bg-black-100 p-8 shadow-xl">
-        <p className="text-sm uppercase tracking-widest text-teal-400">
+    <main className="min-h-screen bg-[#071014] px-4 py-16 text-white">
+      <div className="mx-auto max-w-lg rounded-2xl border border-white/[0.08] bg-[#0a1419] p-7 shadow-2xl sm:p-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#2dd4bf]">
           ADMIN
         </p>
 
@@ -75,7 +75,7 @@ const AdminBanner = () => {
               onChange={(e) => setAdminKey(e.target.value)}
               autoComplete="current-password"
               required
-              className="rounded-lg bg-tertiary px-4 py-3 outline-none"
+              className="rounded-lg border border-white/10 bg-white/[0.025] px-4 py-3 outline-none transition focus:border-[#2dd4bf]/55"
               placeholder="Nhập mật khẩu"
             />
           </label>
@@ -89,7 +89,7 @@ const AdminBanner = () => {
               rows={5}
               maxLength={300}
               required
-              className="rounded-lg bg-tertiary px-4 py-3 outline-none"
+              className="rounded-lg border border-white/10 bg-white/[0.025] px-4 py-3 outline-none transition focus:border-[#2dd4bf]/55"
               placeholder="Nhập nội dung muốn hiển thị..."
             />
           </label>
@@ -97,7 +97,7 @@ const AdminBanner = () => {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-teal-600 px-6 py-3 font-bold hover:bg-teal-500 disabled:opacity-50"
+            className="rounded-lg bg-[#2dd4bf] px-6 py-3 font-semibold text-[#041113] transition hover:bg-[#5eead4] disabled:opacity-50"
           >
             {loading ? "Đang cập nhật..." : "Cập nhật banner"}
           </button>
@@ -105,7 +105,7 @@ const AdminBanner = () => {
 
         <a
           href="/"
-          className="mt-6 inline-block text-teal-400 hover:underline"
+          className="mt-6 inline-block text-sm text-white/45 transition hover:text-[#5eead4]"
         >
           ← Quay về trang chủ
         </a>

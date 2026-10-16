@@ -40,8 +40,8 @@ const Banner = () => {
   return (
     <div className="top-banner" role="status">
       <div className="top-banner-track">
-        <span>📢 {message}</span>
-        <span aria-hidden="true">📢 {message}</span>
+        <span>{message}</span>
+        <span aria-hidden="true">{message}</span>
       </div>
     </div>
   );

@@ -3,86 +3,38 @@ import { motion } from "framer-motion";
 import { TESTIMONIALS } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
-import { cn } from "../utils/lib";
 import { fadeIn, textVariant } from "../utils/motion";
 
-type FeedbackCardProps = {
-  index: number;
-  testimonial: string;
-  name: string;
-  designation: string;
-  company: string;
-  image: string;
-};
-
-// Feedback Card
-const FeedbackCard = ({
-  index,
-  testimonial,
-  name,
-  designation,
-  company,
-  image,
-}: FeedbackCardProps) => (
-  <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className="bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full"
-  >
-    {/* Quote " */}
-    <p className="text-white font-black text-[48px]">"</p>
-
-    <div className="mt-1">
-      {/* Testimonial */}
-      <p className="text-white tracking-wider text-[18px]">{testimonial}</p>
-
-      <div className="mt-7 flex justify-between items-center gap-1">
-        <div className="flex-1 flex flex-col">
-          {/* Name */}
-          <p className="text-white font-medium text-[16px]">
-            <span className="blue-text-gradient">@</span> {name}
-          </p>
-          <p className="mt-1 text-secondary text-[12px]">
-            {designation} of {company}
-          </p>
-        </div>
-
-        {/* User Image */}
-        <img
-          src={image}
-          alt={`feedback-by-${name}`}
-          className="w-10 h-10 rounded-full object-cover"
-        />
-      </div>
-    </div>
-  </motion.div>
-);
-
-// Feedbacks
 export const Feedbacks = () => {
   return (
     <SectionWrapper>
-      <div className="mt-12 bg-black-100 rounded-[20px]">
-        <div
-          className={cn(
-            styles.padding,
-            "bg-tertiary rounded-2xl min-h-[300px]"
-          )}
-        >
-          {/* Title */}
-          <motion.div variants={textVariant()}>
-            <p className={styles.sectionSubText}>Người khác nói gì</p>
-            <h2 className={styles.sectionHeadText}>Lời Chứng Thực.</h2>
-          </motion.div>
-        </div>
+      <motion.div variants={textVariant()}>
+        <p className={styles.sectionSubText}>05 · Đánh giá</p>
+        <h2 className={`${styles.sectionHeadText} mt-4`}>Mọi người nói gì.</h2>
+      </motion.div>
 
-        {/* Feedback Card */}
-        <div
-          className={cn(styles.paddingX, "-mt-20 pb-14 flex flex-wrap gap-7")}
-        >
-          {TESTIMONIALS.map((testimonial, i) => (
-            <FeedbackCard key={testimonial.name} index={i} {...testimonial} />
-          ))}
-        </div>
+      <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        {TESTIMONIALS.map((item, index) => (
+          <motion.article
+            key={item.name}
+            variants={fadeIn("up", "spring", index * 0.12, 0.65)}
+            className="flex min-h-[290px] flex-col justify-between rounded-2xl border border-white/[0.08] bg-white/[0.018] p-7"
+          >
+            <div>
+              <span className="font-display text-4xl leading-none text-[#2dd4bf]">“</span>
+              <p className="mt-5 text-[15px] leading-7 text-white/60">{item.testimonial}</p>
+            </div>
+            <div className="mt-8 flex items-center gap-4 border-t border-white/[0.07] pt-5">
+              <img src={item.image} alt={item.name} className="h-11 w-11 rounded-full object-cover grayscale" />
+              <div>
+                <p className="text-sm font-semibold text-white">{item.name}</p>
+                <p className="mt-1 text-xs text-white/35">
+                  {item.designation} · {item.company}
+                </p>
+              </div>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </SectionWrapper>
   );
