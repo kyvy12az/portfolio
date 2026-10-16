@@ -1,24 +1,58 @@
-import { ComputersCanvas } from "./canvas";
-import { PROJECTS } from "../constants";
+import { motion } from "framer-motion";
 
-export const Hero = () => (
-  <section className="portfolio-hero">
-    <div className="hero-copy">
-      <p className="eyebrow"><span /> NGUYỄN KỲ VỸ · DEVELOPER</p>
-      <h1>Biến ý tưởng<br />thành trải nghiệm<br /><span>có dấu ấn.</span></h1>
-      <p className="hero-description">Xin chào, tôi là Kỳ Vỹ. Tôi xây dựng giao diện web, ứng dụng và trải nghiệm 3D — với sự chăm chút trong từng chi tiết.</p>
-      <div className="hero-actions">
-        <a className="button-primary" href="#projects">Khám phá dự án <span aria-hidden="true">↗</span></a>
-        <a className="button-secondary" href="#contact">Cùng trao đổi <span aria-hidden="true">→</span></a>
+import { ComputersCanvas } from "./canvas";
+import { styles } from "../styles";
+import { cn } from "../utils/lib";
+
+// Hero
+export const Hero = () => {
+  return (
+    <section className="relative w-full h-screen mx-auto">
+      <div
+        className={cn(
+          styles.paddingX,
+          "absolute inset-0 top-[120px] max-w-7xl mx-auto flex flex-row items-start gap-5",
+        )}
+      >
+        {/* Title */}
+        <div className="flex flex-col justify-center items-center mt-5">
+          <div className="w-5 h-5 rounded-full bg-accent" />
+          <div className="w-1 sm:h-80 h-40 violet-gradient" />
+        </div>
+
+        {/* About Me */}
+        <div>
+          <h1 className={cn(styles.heroHeadText, "text-white")}>
+            Xin chào, tôi là <span className="text-accent">Kỳ Vỹ</span>
+          </h1>
+          <p className={cn(styles.heroSubText, "mt-2 text-white-100")}>
+            Tôi phát triển hình ảnh 3D, giao diện <br className="sm:block hidden" />
+            người dùng và ứng dụng web
+          </p>
+        </div>
       </div>
-      <div className="hero-stack"><span>REACT</span><span>TYPESCRIPT</span><span>THREE.JS</span><span>NODE.JS</span></div>
-    </div>
-    <div className="hero-studio">
-      <div className="studio-bar"><span><i /><i /><i /></span><span>MY DIGITAL WORKSPACE</span><span>01 / 02</span></div>
-      <div className="studio-title"><span>Ý tưởng. Mã nguồn. Sản phẩm.</span><p>Một góc làm việc,<br />nhiều khả năng.</p></div>
-      <div className="studio-canvas"><ComputersCanvas /></div>
-      <div className="studio-bottom"><span>Kéo để khám phá không gian 3D</span><span aria-hidden="true">↔</span></div>
-    </div>
-    <div className="hero-footnote"><span>PORTFOLIO / SELECTED WORK</span><a href="#projects">{String(PROJECTS.length).padStart(2, '0')} dự án · Khám phá bên dưới ↓</a></div>
-  </section>
-);
+
+      {/* Computer Model */}
+      <ComputersCanvas />
+
+      {/* Scroll to about section */}
+      <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
+        <a href="#about">
+          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+            <motion.div
+              animate={{
+                y: [0, 24, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="w-3 h-3 rounded-full bg-secondary mb-1"
+            />
+          </div>
+        </a>
+      </div>
+    </section>
+  );
+};

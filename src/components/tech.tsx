@@ -1,5 +1,19 @@
+import { BallCanvas } from "./canvas";
 import { TECHNOLOGIES } from "../constants";
 import { SectionWrapper } from "../hoc";
-export const Tech = () => (
-  <SectionWrapper><div className="section-heading"><div><p className="eyebrow">TOOLKIT</p><h2>Công nghệ sử dụng<span>.</span></h2></div></div><div className="technology-grid">{TECHNOLOGIES.map(tech=><div key={tech.name}><img src={tech.icon} alt="" loading="lazy"/><span>{tech.name}</span></div>)}</div></SectionWrapper>
-);
+
+// Technologies
+export const Tech = () => {
+  return (
+    <SectionWrapper>
+      <div className="flex flex-row flex-wrap justify-center gap-10">
+        {/* Iterate over each technology */}
+        {TECHNOLOGIES.map((technology) => (
+          <div className="w-28 h-28" key={technology.name}>
+            <BallCanvas icon={technology.icon} />
+          </div>
+        ))}
+      </div>
+    </SectionWrapper>
+  );
+};

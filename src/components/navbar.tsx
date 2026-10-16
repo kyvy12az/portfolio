@@ -55,7 +55,7 @@ export const Navbar = () => {
         </Link>
 
         {/* Nav Links (Desktop) */}
-        <ul className="list-none hidden sm:flex flex-row gap-6">
+        <ul className="list-none hidden sm:flex flex-row gap-10">
           {NAV_LINKS
             .filter((link) => link.id !== "source-code")
             .map((link) => (
@@ -70,7 +70,7 @@ export const Navbar = () => {
                     active === link.title
                       ? "text-accent"
                       : "text-secondary",
-                    "hover:text-accent text-[14px] font-medium cursor-pointer font-display transition-colors duration-200 block pb-1",
+                    "hover:text-accent text-[18px] font-medium cursor-pointer font-display transition-colors duration-200 block pb-1",
                   )}
                 >
                   {link.title}
