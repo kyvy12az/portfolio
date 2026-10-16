@@ -127,11 +127,11 @@ export const Contact = () => {
       <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
         <motion.div
           variants={slideIn("left", "tween", 0.2, 1)}
-          className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
+          className="flex-[0.75] bg-black-100 p-6 sm:p-10 rounded-2xl border border-outline"
         >
           {/* Title */}
           <p className={styles.sectionSubText}>Liên hệ</p>
-          <h3 className={styles.sectionHeadText}>Liên Hệ.</h3>
+          <h3 className={styles.sectionHeadText}>Cùng tạo điều mới.</h3>
 
           {/* Form */}
           <form
@@ -187,7 +187,7 @@ export const Contact = () => {
             <label htmlFor="message" className="flex flex-col">
               <span className="text-white font-medium mb-4">Tin Nhắn Của Bạn*</span>
               <textarea
-                rows={7}
+                rows={5}
                 name="message"
                 id="message"
                 value={form.message}
@@ -208,13 +208,13 @@ export const Contact = () => {
             {/* Submit */}
             <button
               type="submit"
-              title={loading ? "Đang gửi..." : "Gửi"}
+              title={loading ? "Đang gửi..." : "Gửi lời nhắn ↗"}
               className="bg-accent hover:bg-accent-hover transition-colors py-3 px-8 w-fit text-primary font-bold shadow-md shadow-primary rounded-xl disabled:bg-tertiary/20 disabled:text-white/60"
               disabled={loading}
               aria-disabled={loading}
             >
               {/* check loader state */}
-              {loading ? "Đang gửi..." : "Gửi"}
+              {loading ? "Đang gửi..." : "Gửi lời nhắn ↗"}
             </button>
           </form>
         </motion.div>

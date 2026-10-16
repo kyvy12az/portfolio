@@ -3,7 +3,6 @@ import {
   About,
   Contact,
   Experience,
-  Feedbacks,
   Hero,
   Navbar,
   Tech,
@@ -28,11 +27,10 @@ const App = () => {
           <Navbar />
           <Hero />
         </div>
-        <About />
-        <Experience />
-        <Tech />
         <Works />
-        <Feedbacks />
+        <About />
+        <Tech />
+        <Experience />
 
         {/* Contact */}
         <div className="relative z-0">

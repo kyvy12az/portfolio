@@ -43,6 +43,7 @@ import {
 
 // Navbar Links
 export const NAV_LINKS = [
+  { id: "projects", title: "Dự Án", link: null },
   {
     id: "about",
     title: "Giới Thiệu",
