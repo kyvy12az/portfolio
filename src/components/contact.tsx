@@ -209,7 +209,7 @@ export const Contact = () => {
             <button
               type="submit"
               title={loading ? "Đang gửi..." : "Gửi"}
-              className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl disabled:bg-tertiary/20 disabled:text-white/60"
+              className="bg-accent hover:bg-accent-hover transition-colors py-3 px-8 w-fit text-primary font-bold shadow-md shadow-primary rounded-xl disabled:bg-tertiary/20 disabled:text-white/60"
               disabled={loading}
               aria-disabled={loading}
             >

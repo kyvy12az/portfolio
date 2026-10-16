@@ -16,14 +16,14 @@ export const Hero = () => {
       >
         {/* Title */}
         <div className="flex flex-col justify-center items-center mt-5">
-          <div className="w-5 h-5 rounded-full bg-[#14b8a6]" />
+          <div className="w-5 h-5 rounded-full bg-accent" />
           <div className="w-1 sm:h-80 h-40 violet-gradient" />
         </div>
 
         {/* About Me */}
         <div>
           <h1 className={cn(styles.heroHeadText, "text-white")}>
-            Xin chào, tôi là <span className="text-[#14b8a6]">Kỳ Vỹ</span>
+            Xin chào, tôi là <span className="text-accent">Kỳ Vỹ</span>
           </h1>
           <p className={cn(styles.heroSubText, "mt-2 text-white-100")}>
             Tôi phát triển hình ảnh 3D, giao diện <br className="sm:block hidden" />

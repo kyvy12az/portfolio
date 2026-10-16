@@ -29,7 +29,7 @@ const ProjectCard = ({
         scale: 1.02,
         speed: 400,
       }}
-      className="bg-tertiary p-5 rounded-2xl w-full group will-change-transform flex flex-col"
+      className="bg-tertiary border border-outline hover:border-accent/40 transition-colors p-5 rounded-2xl w-full group will-change-transform flex flex-col"
     >
       <div className="relative w-full h-[230px] overflow-hidden rounded-2xl flex-shrink-0">
         {/* Work image with overlay */}
@@ -48,7 +48,7 @@ const ProjectCard = ({
           {/* Live Site */}
           <div
             onClick={() => window.open(live_site_link, "_blank", "noreferrer")}
-            className="bg-gradient-to-r from-teal-500 to-cyan-500 w-11 h-11 rounded-full flex justify-center items-center cursor-pointer shadow-lg will-change-transform hover:scale-110 transition-transform duration-150"
+            className="bg-primary/90 border border-outline hover:border-accent w-11 h-11 rounded-full flex justify-center items-center cursor-pointer shadow-lg will-change-transform hover:scale-110 transition-transform duration-150"
             title="Trang Web Trực Tiếp"
           >
             <img
@@ -63,7 +63,7 @@ const ProjectCard = ({
             onClick={() =>
               window.open(source_code_link, "_blank", "noreferrer")
             }
-            className="bg-gradient-to-r from-cyan-500 to-blue-500 w-11 h-11 rounded-full flex justify-center items-center cursor-pointer shadow-lg will-change-transform hover:scale-110 transition-transform duration-150"
+            className="bg-primary/90 border border-outline hover:border-accent w-11 h-11 rounded-full flex justify-center items-center cursor-pointer shadow-lg will-change-transform hover:scale-110 transition-transform duration-150"
             title="Mã Nguồn Github"
           >
             <img
@@ -91,8 +91,8 @@ const ProjectCard = ({
           <span 
             key={`Tag-${tagIdx}`} 
             className={cn(
-              tag.color, 
-              "text-[12px] px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 font-semibold"
+              "text-secondary",
+              "text-[12px] px-3 py-1 rounded-full bg-accent/10 border border-outline font-semibold"
             )}
           >
             #{tag.name}
@@ -117,7 +117,7 @@ export const Works = () => {
         {/* About */}
         <div className="w-full flex">
           <motion.p
-            variants={fadeIn("", "", 0.1, 1)}
+            variants={fadeIn(undefined, "tween", 0.1, 1)}
             className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
           >
             Các dự án sau đây thể hiện kỹ năng và kinh nghiệm của tôi thông qua

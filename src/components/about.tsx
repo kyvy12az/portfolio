@@ -29,11 +29,11 @@ const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
       >
         <div className="bg-tertiary rounded-[20px] py-8 px-12 min-h-[280px] flex justify-evenly items-center flex-col relative overflow-hidden backdrop-blur-sm bg-opacity-90 group-hover:bg-opacity-100 transition-all duration-300">
           {/* Decorative gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
           {/* Icon container with animation */}
           <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
-            <div className="absolute inset-0 bg-teal-500/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
+            <div className="absolute inset-0 bg-accent/5 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
             <img 
               src={icon} 
               alt={title} 
@@ -42,12 +42,12 @@ const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
           </div>
           
           {/* Title with gradient on hover */}
-          <h3 className="text-white text-[20px] font-bold text-center relative z-10 mt-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 transition-all duration-300 font-display">
+          <h3 className="text-white text-[20px] font-bold text-center relative z-10 mt-4 group-hover:text-accent transition-all duration-300 font-display">
             {title}
           </h3>
           
           {/* Bottom accent line */}
-          <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 group-hover:w-full transition-all duration-500 rounded-b-[20px]" />
+          <div className="absolute bottom-0 left-0 w-0 h-1 bg-accent group-hover:w-full transition-all duration-500 rounded-b-[20px]" />
         </div>
       </motion.div>
     </Tilt>
