@@ -1,3 +1,4 @@
+import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
 import { SERVICES } from "../constants";
@@ -5,64 +6,84 @@ import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 
-const ServiceCard = ({
-  index,
-  title,
-  icon,
-}: {
+type ServiceCardProps = {
   index: number;
   title: string;
   icon: string;
-}) => (
-  <motion.article
-    variants={fadeIn("up", "spring", index * 0.12, 0.65)}
-    className="group border-t border-white/10 py-7 transition-colors hover:border-[#2dd4bf]/55"
-  >
-    <div className="flex items-start justify-between gap-5">
-      <div>
-        <span className="font-display text-[11px] tracking-[0.2em] text-white/30">
-          0{index + 1}
-        </span>
-        <h3 className="mt-4 max-w-[230px] font-display text-xl font-medium leading-snug text-white/88 transition-colors group-hover:text-white">
-          {title}
-        </h3>
-      </div>
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.025]">
-        <img src={icon} alt="" className="h-7 w-7 object-contain opacity-75 grayscale transition group-hover:grayscale-0" />
-      </div>
-    </div>
-  </motion.article>
-);
+};
 
+// Service Card
+const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
+  return (
+    <Tilt
+      options={{
+        max: 45,
+        scale: 1,
+        speed: 450,
+      }}
+      className="xs:w-[250px] w-full group"
+    >
+      <motion.div
+        variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
+        className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card hover:shadow-2xl transition-all duration-300"
+      >
+        <div className="bg-tertiary rounded-[20px] py-8 px-12 min-h-[280px] flex justify-evenly items-center flex-col relative overflow-hidden backdrop-blur-sm bg-opacity-90 group-hover:bg-opacity-100 transition-all duration-300">
+          {/* Decorative gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Icon container with animation */}
+          <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute inset-0 bg-teal-500/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
+            <img 
+              src={icon} 
+              alt={title} 
+              className="w-16 h-16 object-contain relative z-10 drop-shadow-2xl" 
+            />
+          </div>
+          
+          {/* Title with gradient on hover */}
+          <h3 className="text-white text-[20px] font-bold text-center relative z-10 mt-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-400 group-hover:to-cyan-400 transition-all duration-300 font-display">
+            {title}
+          </h3>
+          
+          {/* Bottom accent line */}
+          <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 group-hover:w-full transition-all duration-500 rounded-b-[20px]" />
+        </div>
+      </motion.div>
+    </Tilt>
+  );
+};
+
+// About
 export const About = () => {
   return (
     <SectionWrapper idName="about">
-      <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+      <>
+        {/* Title */}
         <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>01 · Giới thiệu</p>
-          <h2 className={`${styles.sectionHeadText} mt-4 max-w-xl`}>
-            Không chỉ là những dòng mã.
-          </h2>
+          <p className={styles.sectionSubText}>Giới thiệu</p>
+          <h2 className={styles.sectionHeadText}>Tổng quan.</h2>
         </motion.div>
 
-        <motion.div variants={fadeIn(undefined, undefined, 0.1, 0.8)}>
-          <p className="max-w-2xl text-[17px] leading-8 text-white/55">
-            Tôi là một lập trình viên web làm việc với TypeScript, JavaScript,
-            React, Node.js và Three.js. Tôi yêu thích việc biến những ý tưởng
-            phức tạp thành sản phẩm trực quan, nhanh và dễ sử dụng.
-          </p>
-          <p className="mt-5 max-w-2xl text-[17px] leading-8 text-white/55">
-            Tôi luôn đặt trải nghiệm người dùng, chất lượng mã nguồn và khả năng
-            phát triển lâu dài của sản phẩm ở vị trí trung tâm.
-          </p>
-        </motion.div>
-      </div>
+        {/* Body */}
+        <motion.p
+          variants={fadeIn(undefined, undefined, 0.1, 1)}
+          className="empty-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
+        >
+          Tôi là một lập trình viên web có kinh nghiệm với TypeScript và
+          Javascript, và chuyên môn về các framework như React, Node.js và
+          Three.js. Tôi học nhanh và hợp tác chặt chẽ với khách hàng để
+          tạo ra các giải pháp hiệu quả, dễ mở rộng và thân thiện với người dùng,
+          giải quyết các vấn đề thực tế. Hãy cùng hợp tác để biến ý tưởng của bạn thành hiện thực!
+        </motion.p>
 
-      <div className="mt-16 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
-        {SERVICES.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
-      </div>
+        {/* Service Card */}
+        <div className="mt-20 flex flex-wrap gap-10">
+          {SERVICES.map((service, i) => (
+            <ServiceCard key={service.title} index={i} {...service} />
+          ))}
+        </div>
+      </>
     </SectionWrapper>
   );
 };

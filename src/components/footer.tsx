@@ -10,17 +10,17 @@ const Footer = () => {
     <footer
       className={cn(
         styles.paddingX,
-        "flex w-full items-center border-t border-white/[0.07] bg-[#050b0e] py-8"
+        "w-full flex items-center py-8 bg-gradient-to-r from-primary via-tertiary to-primary border-t border-t-teal-500/20 backdrop-blur-sm"
       )}
     >
       <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
         {/* Copyright */}
-        <p className="text-center font-display text-xs tracking-wide text-white/35 sm:text-left">
+        <p className="text-secondary text-sm font-display text-center sm:text-left">
           &copy; Kỳ Vỹ {new Date().getFullYear()}. Tất cả quyền được bảo lưu.
         </p>
 
         {/* Social Links */}
-        <ul className="flex list-none flex-row gap-3">
+        <ul className="list-none flex flex-row gap-6">
           {SOCIALS.map((social) => (
             <li
               key={social.name}
@@ -32,15 +32,21 @@ const Footer = () => {
                 rel="noreferrer noopener"
                 className="block"
               >
-                <div className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.02] transition-all duration-300 hover:border-[#2dd4bf]/40">
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-teal-500/20 rounded-full blur-md group-hover:blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                
+                {/* Icon */}
+                <div className="relative w-10 h-10 flex items-center justify-center rounded-full border border-teal-500/20 group-hover:border-teal-500/50 bg-tertiary/50 group-hover:bg-teal-500/10 transition-all duration-300 group-hover:scale-110">
                   <img 
                     src={social.icon} 
                     alt={social.name} 
-                    className="h-4 w-4 opacity-55 invert transition-opacity group-hover:opacity-100"
+                    className="h-5 w-5 text-secondary group-hover:text-teal-400 transition-colors duration-300"
+                    style={{ filter: 'invert(0.7) sepia(1) saturate(0.5) hue-rotate(140deg)' }}
                   />
                 </div>
                 
-                <span className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/10 bg-[#0a1419] px-2 py-1 text-[10px] text-white/70 opacity-0 transition group-hover:opacity-100">
+                {/* Tooltip */}
+                <span className="absolute -top-10 left-1/2 -translate-x-1/2 bg-teal-500/90 text-white text-xs px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap backdrop-blur-sm">
                   {social.name}
                 </span>
               </Link>
